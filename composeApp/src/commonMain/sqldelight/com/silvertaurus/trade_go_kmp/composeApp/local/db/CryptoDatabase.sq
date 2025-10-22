@@ -1,0 +1,37 @@
+CREATE TABLE CoinCache (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    symbol TEXT NOT NULL,
+    rank INTEGER NOT NULL,
+    priceUsd REAL NOT NULL,
+    changePercent24Hr REAL NOT NULL,
+    marketCapUsd REAL NOT NULL
+);
+
+CREATE TABLE Watchlist (
+    coinId TEXT NOT NULL PRIMARY KEY
+);
+
+-- CoinCache
+selectAll:
+SELECT * FROM CoinCache;
+
+insertItem:
+INSERT OR REPLACE INTO CoinCache(id, name, symbol, rank, priceUsd, changePercent24Hr, marketCapUsd)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+clearAll:
+DELETE FROM CoinCache;
+
+-- Watchlist
+watchlistSelectAll:
+SELECT * FROM Watchlist;
+
+insertWatchlistItem:
+INSERT OR REPLACE INTO Watchlist(coinId) VALUES (?);
+
+deleteWatchlistItem:
+DELETE FROM Watchlist WHERE coinId = ?;
+
+existsInWatchlist:
+SELECT COUNT(*) FROM Watchlist WHERE coinId = ?;
