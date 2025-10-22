@@ -31,8 +31,8 @@ class CoinRepositoryImpl(
         return remote.getPriceHistory(id, interval)
     }
 
-    override fun observePriceUpdates(ids: List<String>): Flow<Map<String, Double>> {
-        return remote.observePriceUpdates(ids)
+    override fun observePriceUpdates(): Flow<Map<String, Double>> {
+        return remote.observePriceUpdates()
     }
 
     override fun observeWatchlist(): Flow<Set<String>> {

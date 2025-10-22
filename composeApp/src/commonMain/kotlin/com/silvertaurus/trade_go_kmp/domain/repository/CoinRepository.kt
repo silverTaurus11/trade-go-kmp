@@ -11,7 +11,7 @@ interface CoinRepository {
     suspend fun getAssetDetail(id: String): CoinDetail
     suspend fun getPriceHistory(id: String, interval: String): List<PriceHistoryPoint>
 
-    fun observePriceUpdates(ids: List<String>): Flow<Map<String, Double>>
+    fun observePriceUpdates(): Flow<Map<String, Double>>
     fun observeWatchlist(): Flow<Set<String>>
     suspend fun toggleWatchlist(id: String)
 }

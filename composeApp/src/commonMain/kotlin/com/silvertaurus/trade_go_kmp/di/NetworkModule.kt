@@ -1,19 +1,25 @@
 package com.silvertaurus.trade_go_kmp.di
 
-import com.silvertaurus.trade_go_kmp.composeApp.local.db.CryptoDatabase
-import com.silvertaurus.trade_go_kmp.data.sources.interfaces.LocalDataSource
 import com.silvertaurus.trade_go_kmp.data.sources.interfaces.RemoteDataSource
-import com.silvertaurus.trade_go_kmp.data.sources.local.LocalDataSourceImpl
-import com.silvertaurus.trade_go_kmp.data.sources.remote.CoinCapApi
-import com.silvertaurus.trade_go_kmp.data.sources.remote.CoinCapWebsocket
-import com.silvertaurus.trade_go_kmp.data.sources.remote.HttpClientFactory
+import com.silvertaurus.trade_go_kmp.di.HttpClientFactory
 import com.silvertaurus.trade_go_kmp.data.sources.remote.RemoteDataSourceImpl
+import com.silvertaurus.trade_go_kmp.data.sources.remote.restapi.ApiConfig
+import com.silvertaurus.trade_go_kmp.data.sources.remote.restapi.CoinCapApi
+import com.silvertaurus.trade_go_kmp.data.sources.remote.socket.CoinCapSocketClient
+import com.silvertaurus.trade_go_kmp.data.sources.remote.socket.CoinCapWebsocket
+import com.silvertaurus.trade_go_kmp.util.DispatchersProvider
 import org.koin.dsl.module
 
 val networkModule = module {
-    // Remote
+    single { DispatchersProvider() }
     single { HttpClientFactory.create() }
     single { CoinCapApi(get()) }
-    single { CoinCapWebsocket(get()) }
-    single<RemoteDataSource> { RemoteDataSourceImpl(get(), get()) }
+    single {
+        CoinCapSocketClient(
+            httpClient = get(),
+            apiKey = ApiConfig.TOKEN
+        )
+    }
+    single { CoinCapWebsocket(get(), get()) }
+    single<RemoteDataSource> { RemoteDataSourceImpl(get(), get(), get()) }
 }

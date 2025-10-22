@@ -20,6 +20,7 @@ koinCore = "4.1.1"
 kotlin = "2.2.20"
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxSerializationCore = "1.9.0"
+ktorClientCio = "3.3.1"
 ktorClientLogging = "3.3.1"
 nativeDriver = "1.5.5"
 runtime = "1.5.5"
@@ -51,6 +52,7 @@ ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktorCli
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientLogging" }
 ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktorClientLogging" }
+ktor-ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientLogging" }
 material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core" }
 material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended" }

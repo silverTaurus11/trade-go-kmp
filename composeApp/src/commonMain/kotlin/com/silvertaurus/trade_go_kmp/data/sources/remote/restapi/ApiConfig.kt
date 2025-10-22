@@ -1,4 +1,4 @@
-package com.silvertaurus.trade_go_kmp.data.sources.remote
+package com.silvertaurus.trade_go_kmp.data.sources.remote.restapi
 
 object ApiConfig {
     const val BASE_URL = "https://rest.coincap.io/v3"

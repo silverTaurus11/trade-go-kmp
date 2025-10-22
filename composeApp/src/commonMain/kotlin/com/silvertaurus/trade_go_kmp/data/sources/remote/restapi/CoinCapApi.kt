@@ -1,9 +1,10 @@
-package com.silvertaurus.trade_go_kmp.data.sources.remote
+package com.silvertaurus.trade_go_kmp.data.sources.remote.restapi
 
 import com.silvertaurus.trade_go_kmp.data.dto.CoinDetailWrapper
 import com.silvertaurus.trade_go_kmp.data.dto.CoinListResponse
 import com.silvertaurus.trade_go_kmp.data.dto.PriceHistoryWrapper
 import com.silvertaurus.trade_go_kmp.data.dto.toDomain
+import com.silvertaurus.trade_go_kmp.data.sources.remote.restapi.ApiConfig
 import com.silvertaurus.trade_go_kmp.domain.model.Coin
 import com.silvertaurus.trade_go_kmp.domain.model.CoinDetail
 import com.silvertaurus.trade_go_kmp.domain.model.PriceHistoryPoint

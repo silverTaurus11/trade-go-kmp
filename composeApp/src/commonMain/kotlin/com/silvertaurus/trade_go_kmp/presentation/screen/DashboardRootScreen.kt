@@ -17,6 +17,7 @@ import com.silvertaurus.trade_go_kmp.presentation.component.DashboardTab
 fun DashboardRootScreen(
     coins: List<Coin>,
     watchlist: Set<String>,
+    watchListCoins: List<Coin>,
     onSelectCoin: (String) -> Unit,
     onToggleWatchlist: (String) -> Unit
 ) {
@@ -41,7 +42,7 @@ fun DashboardRootScreen(
                 modifier = Modifier.padding(padding)
             )
             DashboardTab.Watchlist -> WatchListScreen(
-                coins = coins.filter { it.id in watchlist },
+                coins = watchListCoins,
                 watchlist = watchlist,
                 onSelectCoin = onSelectCoin,
                 onToggleWatchlist = onToggleWatchlist,

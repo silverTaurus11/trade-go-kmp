@@ -4,8 +4,9 @@ import com.silvertaurus.trade_go_kmp.domain.model.CoinDetail
 import com.silvertaurus.trade_go_kmp.domain.model.PriceHistoryPoint
 import com.silvertaurus.trade_go_kmp.domain.usecase.GetCoinDetailUseCase
 import com.silvertaurus.trade_go_kmp.domain.usecase.GetPriceHistoryUseCase
+import com.silvertaurus.trade_go_kmp.domain.usecase.ObservePriceUpdatesUseCase
+import com.silvertaurus.trade_go_kmp.util.DispatchersProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,9 +21,11 @@ enum class Interval(val label: String) {
 class DetailViewModel(
     private val id: String,
     private val getDetail: GetCoinDetailUseCase,
-    private val getHistory: GetPriceHistoryUseCase
+    private val getHistory: GetPriceHistoryUseCase,
+    private val observePriceUpdates: ObservePriceUpdatesUseCase,
+    dispatcher: DispatchersProvider
 ) {
-    private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    private val scope = CoroutineScope(SupervisorJob() + dispatcher.io)
 
     private val _coin = MutableStateFlow<CoinDetail?>(null)
     val coin = _coin.asStateFlow()
@@ -38,6 +41,20 @@ class DetailViewModel(
             _coin.value = getDetail(id)
             loadHistory()
         }
+
+        scope.launch {
+            observePriceUpdates()
+                .collect { priceMap ->
+                    val newPrice = priceMap[id]
+                    if (newPrice != null) {
+                        val current = _coin.value
+                        if (current != null && current.priceUsd != newPrice) {
+                            _coin.value = current.copy(priceUsd = newPrice)
+                            println("💹 [Realtime] ${current.symbol} updated price = $newPrice")
+                        }
+                    }
+                }
+        }
     }
 
     fun onIntervalChanged(newInterval: Interval) {
@@ -52,6 +69,12 @@ class DetailViewModel(
             Interval.HOUR_1 -> "h1"
         }
 
-        _history.value = getHistory(id, intervalParam)
+        try {
+            val result = getHistory(id, intervalParam)
+            _history.value = result
+            println("📊 Loaded ${result.size} history points for $intervalParam")
+        } catch (e: Exception) {
+            println("⚠️ Failed to load history: ${e.message}")
+        }
     }
 }

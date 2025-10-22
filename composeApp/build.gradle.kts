@@ -68,6 +68,7 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.ktor.ktor.client.cio)
             implementation(libs.sqldelight.android.driver)
             implementation(libs.koin.android)
             implementation(libs.compose.charts)

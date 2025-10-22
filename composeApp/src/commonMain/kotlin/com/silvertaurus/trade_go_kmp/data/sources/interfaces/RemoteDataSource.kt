@@ -9,5 +9,5 @@ interface RemoteDataSource {
     suspend fun fetchAssets(limit: Int = 100): List<Coin>
     suspend fun getAssetDetail(id: String): CoinDetail
     suspend fun getPriceHistory(id: String, interval: String = "d1"): List<PriceHistoryPoint>
-    fun observePriceUpdates(ids: List<String>): Flow<Map<String, Double>>
+    fun observePriceUpdates(): Flow<Map<String, Double>>
 }

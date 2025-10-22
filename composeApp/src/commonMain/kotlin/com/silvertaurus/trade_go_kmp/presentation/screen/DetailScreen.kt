@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,30 +20,21 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.silvertaurus.trade_go_kmp.domain.usecase.GetCoinDetailUseCase
-import com.silvertaurus.trade_go_kmp.domain.usecase.GetPriceHistoryUseCase
 import com.silvertaurus.trade_go_kmp.presentation.component.ChartLineView
-import com.silvertaurus.trade_go_kmp.presentation.component.ChartView
 import com.silvertaurus.trade_go_kmp.presentation.component.IntervalSelector
 import com.silvertaurus.trade_go_kmp.presentation.viewmodel.DetailViewModel
-import org.koin.compose.koinInject
+import com.silvertaurus.trade_go_kmp.presentation.viewmodel.ViewModelFactory
 
 class DetailScreen(
-    private val context: com.arkivanov.decompose.ComponentContext,
     private val coinId: String,
     private val onBack: () -> Unit
 ) {
     @Composable
     fun Render() {
-        val getDetail: GetCoinDetailUseCase = koinInject()
-        val getHistory: GetPriceHistoryUseCase = koinInject()
-        val vm = remember { DetailViewModel(coinId, getDetail, getHistory) }
-
-        DetailContent(vm = vm, onBack = onBack)
+        DetailContent(vm = ViewModelFactory.rememberDetailViewModel(coinId), onBack = onBack)
     }
 }
 
