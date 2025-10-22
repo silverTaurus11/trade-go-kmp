@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -24,7 +25,12 @@ fun BottomNavigationBar(
             selected = selectedTab == DashboardTab.All,
             onClick = { onTabSelected(DashboardTab.All) },
             icon = { Icon(Icons.Default.List, contentDescription = "All") },
-            label = { Text("All", color = Color.White) },
+            label = {
+                Text(
+                    "All",
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFF00FF87),
                 selectedTextColor = Color(0xFF00FF87),
@@ -37,7 +43,12 @@ fun BottomNavigationBar(
             selected = selectedTab == DashboardTab.Watchlist,
             onClick = { onTabSelected(DashboardTab.Watchlist) },
             icon = { Icon(Icons.Default.Star, contentDescription = "Watchlist") },
-            label = { Text("Watchlist", color = Color.White) },
+            label = {
+                Text(
+                    "Watchlist",
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFF00FF87),
                 selectedTextColor = Color(0xFF00FF87),

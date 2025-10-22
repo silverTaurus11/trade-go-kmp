@@ -34,11 +34,12 @@ fun CoinRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text("${coin.name} (${coin.symbol})", color = Color.White)
+            Text(
+                "${coin.name} (${coin.symbol})",
+                style = MaterialTheme.typography.bodyLarge)
             Text(
                 "Price: $${coin.priceUsd}",
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White
             )
         }
         IconButton(onClick = { onToggle(coin.id) }) {

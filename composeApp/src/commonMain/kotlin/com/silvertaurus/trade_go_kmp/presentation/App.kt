@@ -5,11 +5,11 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.silvertaurus.trade_go_kmp.presentation.navigation.AppRoot
-import com.silvertaurus.trade_go_kmp.presentation.theme.AppTheme
+import com.silvertaurus.trade_go_kmp.presentation.theme.TradeGoTheme
 
 @Composable
 fun App(componentContext: DefaultComponentContext = DefaultComponentContext(LifecycleRegistry())) {
-    AppTheme {
+    TradeGoTheme {
         val root = AppRoot(componentContext)
         Children(stack = root.childStack) {
             when (val child = it.instance) {

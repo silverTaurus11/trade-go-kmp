@@ -48,7 +48,12 @@ fun DetailContent(vm: DetailViewModel, onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(detail?.symbol ?: "Loading...", color = Color(0xFF00FF87)) },
+                title = {
+                    Text(
+                        detail?.symbol ?: "Loading...",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
