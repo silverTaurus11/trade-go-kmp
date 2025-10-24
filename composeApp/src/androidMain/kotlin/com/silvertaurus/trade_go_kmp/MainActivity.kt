@@ -5,12 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.silvertaurus.trade_go_kmp.presentation.App
+import com.silvertaurus.trade_go_kmp.shared.createLifecycle
 
 class MainActivity : ComponentActivity() {
 
-    private val mainLifecycle = LifecycleRegistry()
+    private val mainLifecycle by lazy { createLifecycle() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
